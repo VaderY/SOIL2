@@ -2,6 +2,7 @@ bin/soil2/
 bin/soil2-*
 obj/
 make/
+build/
 lib/
 bin/dds/
 projects/

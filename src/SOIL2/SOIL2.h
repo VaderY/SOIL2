@@ -404,6 +404,21 @@ unsigned char*
 	);
 
 /**
+	Saves an image from an array of unsigned chars (RGBA) to memory
+	\param quality parameter only used for SOIL_SAVE_TYPE_JPG files, values accepted between 0 and 100.
+	\return 0 if failed, otherwise returns 1
+**/
+int
+	SOIL_save_image_quality_to_func
+	(
+		void (*to_func)(void *context, void *data, int size), void *context,
+		int image_type,
+		int width, int height, int channels,
+		const unsigned char *const data,
+		int quality
+	);
+
+/**
 	Saves an image from an array of unsigned chars (RGBA) to disk
 	\param quality parameter only used for SOIL_SAVE_TYPE_JPG files, values accepted between 0 and 100.
 	\return 0 if failed, otherwise returns 1

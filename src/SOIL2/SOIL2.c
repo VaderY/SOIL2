@@ -1950,6 +1950,65 @@ int
 }
 
 int
+SOIL_save_image_quality_to_func
+	(
+		void (*to_func)(void *context, void *data, int size), void *context,
+		int image_type,
+		int width, int height, int channels,
+		const unsigned char *const data,
+		int quality
+	)
+{
+	int save_result;
+
+	/*	error check	*/
+	if( (width < 1) || (height < 1) ||
+			(channels < 1) || (channels > 4) ||
+			(data == NULL) ||
+			(to_func == NULL) )
+	{
+		return 0;
+	}
+	if( image_type == SOIL_SAVE_TYPE_BMP )
+	{
+		save_result = stbi_write_bmp_to_func(to_func, context,
+				width, height, channels, (void*)data );
+	} else
+	if( image_type == SOIL_SAVE_TYPE_TGA )
+	{
+		save_result = stbi_write_tga_to_func(to_func, context,
+				width, height, channels, (void*)data );
+	} else
+	if( image_type == SOIL_SAVE_TYPE_DDS )
+	{
+		save_result = save_image_as_DDS_to_func(to_func, context,
+				width, height, channels, (const unsigned char *const)data );
+	} else
+	if( image_type == SOIL_SAVE_TYPE_PNG )
+	{
+		save_result = stbi_write_png_to_func(to_func, context,
+				width, height, channels, (const unsigned char *const)data, 0 );
+	} else
+	if ( image_type == SOIL_SAVE_TYPE_JPG )
+	{
+		save_result = jo_write_jpg_to_func( to_func, context, (const void*)data, width, height, channels, quality );
+	}
+	else
+	{
+		save_result = 0;
+	}
+
+	if( save_result == 0 )
+	{
+		result_string_pointer = "Saving the image failed";
+	} else
+	{
+		result_string_pointer = "Image saved";
+	}
+	return save_result;
+}
+
+int
 	SOIL_save_image_quality
 	(
 		const char *filename,
