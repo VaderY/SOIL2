@@ -1,3 +1,11 @@
+**VaderY/SOIL2** is a fork that includes:
+- Minimal CMake support
+- In memory image save (encode) function for all 5 supported format: SOIL_save_image_quality_to_func
+
+
+
+
+
 Simple OpenGL Image Library 2 ![SOIL2](https://web.ensoft.dev/soil2/soil2-logo.svg)
 =============================
 
